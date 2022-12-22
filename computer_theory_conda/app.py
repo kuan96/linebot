@@ -74,13 +74,14 @@ machine = TocMachine(
 )
 
 # 自動推播
+line_bot_api.push_message(
+    'Udaa53119f038c9c8a346b9a6b5a770e5', TextSendMessage(text='我是你的個人小助理nikey,很高興為你服務'))
 
-
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    line_bot_api.push_message(
-        'Udaa53119f038c9c8a346b9a6b5a770e5', TextSendMessage(text='我是你的個人小助理nikey,很高興為你服務'))
-    return 'success'
+# @app.route('/', methods=['GET', 'POST'])
+# def home():
+#     line_bot_api.push_message(
+#         'Udaa53119f038c9c8a346b9a6b5a770e5', TextSendMessage(text='我是你的個人小助理nikey,很高興為你服務'))
+#     return 'success'
 
 # 接收 LINE 的資訊
 
@@ -107,15 +108,6 @@ def callback():
 def pretty_echo(event):
 
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
-
-        # Phoebe 愛唱歌
-        pretty_note = '♫♪♬'
-        pretty_text = ''
-
-        # for i in event.message.text:
-
-        #     pretty_text += i
-        #     pretty_text += random.choice(pretty_note)
         response = machine.advance(event)
         if response == False:
             line_bot_api.reply_message(
