@@ -104,7 +104,7 @@ def pretty_echo(event):
         if response == False:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="不好意思我看不懂你的指令..")
+                TextSendMessage(text="不好意思我看不懂你的指令..可以再問一次嗎?")
             )
             machine.go_back()
 
