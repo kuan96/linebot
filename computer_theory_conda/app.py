@@ -106,6 +106,7 @@ def pretty_echo(event):
                 event.reply_token,
                 TextSendMessage(text="不好意思我看不懂你的指令..")
             )
+            machine.go_back()
 
 
 if __name__ == "__main__":
