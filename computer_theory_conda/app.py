@@ -22,9 +22,9 @@ config.read('config.ini')
 
 handler = WebhookHandler(config.get('line-bot', 'channel_secret'))
 line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
-url = config.get("line-bot", "channel_access_token")
 
 
+#state setting
 machine = TocMachine(
     states=["user", "imgState", "ttState",
             "songState", "searchImage", "answer", "weather"],
@@ -77,15 +77,8 @@ machine = TocMachine(
 line_bot_api.push_message(
     'Udaa53119f038c9c8a346b9a6b5a770e5', TextSendMessage(text='我是你的個人小助理nikey,很高興為你服務'))
 
-# @app.route('/', methods=['GET', 'POST'])
-# def home():
-#     line_bot_api.push_message(
-#         'Udaa53119f038c9c8a346b9a6b5a770e5', TextSendMessage(text='我是你的個人小助理nikey,很高興為你服務'))
-#     return 'success'
 
 # 接收 LINE 的資訊
-
-
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
@@ -103,10 +96,9 @@ def callback():
     return 'OK'
 
 
-# 學你說話
+# 回覆
 @handler.add(MessageEvent, message=TextMessage)
 def pretty_echo(event):
-
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
         response = machine.advance(event)
         if response == False:
